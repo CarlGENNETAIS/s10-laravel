@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\ValidatePostRequest;
+use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class PostController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth')->only(['create','edit']);
+
+    public function __construct()
+    {
+        $this->middleware('admin', ['except' => ['index','show']]);
     }
 
     /**
@@ -19,9 +24,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $list = Post::paginate(10);
-
-        return view('posts.index', compact('list'));
+        return response()->view('articles.index', array_merge([
+            'posts' =>  Post::all()
+        ]));
     }
 
     /**
@@ -31,7 +36,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+
+        return view('articles.create');
+
     }
 
     /**
@@ -40,16 +47,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidatePostRequest $request)
     {
-        $this -> validate($request, [
-            'title' => 'required',
-            'content' => 'required'
-            ]);
 
-        $post = new Post;
-        $input = $request -> input();
-        $input
+        $post = Post::create($request->except('_token'));
+
+        return redirect(route('articles.index'));
+
     }
 
     /**
@@ -60,7 +64,13 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
+        return response()->view('articles.show', array_merge([
+            'post' =>  Post::find($id),
+            'id'    =>  $id
+        ]));
+
+
     }
 
     /**
@@ -71,7 +81,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->view('articles.edit', array_merge([
+            'post' =>  Post::find($id),
+            'id'    =>  $id
+        ]));
     }
 
     /**
@@ -81,9 +94,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidatePostRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->update($request->except('_token'));
+
+        return redirect(route('articles.index'));
     }
 
     /**
@@ -94,6 +111,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->delete($post->all());
+
+        return redirect(route('articles.index'));
     }
 }

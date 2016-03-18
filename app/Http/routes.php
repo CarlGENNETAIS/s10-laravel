@@ -39,7 +39,8 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('/home', 'HomeController@index');
 
-	Route::resource('/post','PostController');
+    // Création et édition des articles
+    Route::resource('/articles', 'PostController');
 
 	Route::get('/admin',function() {
 		return 'admin';
