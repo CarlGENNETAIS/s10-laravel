@@ -37,6 +37,7 @@ Route::group(['middleware' => 'web'], function () {
 		return view('welcome');
 	});
 
+	// apres login
 	Route::get('/home', 'HomeController@index');
 
     // Gestion des articles
