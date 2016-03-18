@@ -39,15 +39,16 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('/home', 'HomeController@index');
 
-    // Création et édition des articles
+    // Gestion des articles
     Route::resource('/articles', 'PostController');
+    Route::get('/articles/destroy/{$id}', 'PostController@destroy');
+
 
 	// Gestion des commentaires
     Route::post('/comments', 'CommentsController@store');
     Route::get('comments/{comment}', 'CommentsController@destroy');
-    
-	Route::get('/admin',function() {
-		return 'admin';
-	})->middleware('isadmin');
+
+    // Gestion de l'administration
+    Route::resource('/admin', 'AdminController');
 	
 });

@@ -22,17 +22,17 @@
         {!! Form::hidden('user_id', $post->id) !!}
     @endif
 
-    {{--Message disponible pour tout les utilisateurs--}}
+    {{--Message disponible pour tous les utilisateurs--}}
     <div class="col-md-12">
         <div class="form-group">
-            {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Message']) !!}
+            {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Votre commentaire']) !!}
         </div>
     </div>
     {!! Form::hidden('post_id', $id) !!}
 </div>
 
 <p class="text-right">
-    {!! Form::submit('Envoyer', ['class'    =>  'btn btn-primary btn-lg btn-block']) !!}
+    {!! Form::submit('Publier', ['class'    =>  'btn btn-primary btn-lg btn-block']) !!}
 </p>
 
 {!! Form::close() !!}

@@ -7,7 +7,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <a href="{{ URL::previous() }}"><button class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> Retour</button></a><br /><br />
+                <a href="{{ url('/articles') }}"><button class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> Retour</button></a>
+                 @if(Auth::check() && Auth::user()->isAdmin())
+                <a href="{!! $post->id !!}/edit" style="display:inline-block;"><button class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Éditer l'article</button></a>
+                {!! Form::open (array(
+                'method'=>'delete',
+                'route' =>['articles.destroy',$post->id],
+                'style'  =>  'display:inline-block;'
+                )) !!}
+                {!! Form::button('<i class="glyphicon glyphicon-trash"></i> Supprimer l\'article', ['type' => 'submit', 'class' =>  'btn btn-danger']) !!}
+                {!! Form::close() !!}
+                @endif
+                <br /><br />
                 <div class="panel panel-default">
                     <div class="panel-heading"><h2>{!! $post->title !!}</h2></div>
 
@@ -24,6 +35,7 @@
 
                     </div>
                 </div>
+                
             </div>
         </div>
 
