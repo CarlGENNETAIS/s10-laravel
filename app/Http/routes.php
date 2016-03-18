@@ -11,6 +11,13 @@
 |
 */
 
+Route::resource('/articles','ArticleController');
+
+
+Route::get('/articles/{id}', function ($id) {
+	return 'Article Nº'.$id;
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,20 +30,19 @@
 |
 */
 
-
-
 Route::group(['middleware' => 'web'], function () {
+	Route::auth();
 
-    Route::auth();
+	Route::get('/', function () {
+		return view('welcome');
+	});
 
-    Route::get('/home', 'HomeController@index');
+	Route::get('/home', 'HomeController@index');
 
-	Route::get('/', function() {
-    	return view('welcome');
-});
-	Route::resource('/post', 'PostController');
+	Route::resource('/post','PostController');
 
-	Route::get('/admin', function(){
+	Route::get('/admin',function() {
 		return 'admin';
 	})->middleware('isadmin');
+	
 });

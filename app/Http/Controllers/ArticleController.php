@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class PostController extends Controller
+class ArticleController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth')->only(['create','edit']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +17,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $list = Post::paginate(10);
-
-        return view('posts.index', compact('list'));
+        // correspond à /articles
+        $posts = Post::all();
+        dd($posts);
+        return 'Liste des articles';
     }
 
     /**
@@ -31,7 +30,12 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
+        $post = new Post;
+        $post->title = 'Un autre article';
+        $post->content = 'Une autre description';
+        $post->save();
+        return 'Formulaire';
     }
 
     /**
@@ -42,14 +46,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $this -> validate($request, [
-            'title' => 'required',
-            'content' => 'required'
-            ]);
-
-        $post = new Post;
-        $input = $request -> input();
-        $input
+        //
     }
 
     /**
@@ -61,6 +58,13 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        $post = Post::find($id);
+        if ($post) {
+            return $post->title;
+        }
+        else {
+            return 'N\'existe pas';
+        }
     }
 
     /**
@@ -72,6 +76,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        return 'edition de l\'article nº'.$id;
+
     }
 
     /**

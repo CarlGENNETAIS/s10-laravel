@@ -11,7 +11,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //App\Models\User::truncate(); // Vide la base de données
-		factory(\App\Models\User::class, 20)->create(); // Créer 20 utilisateurs
+    	DB::table('users')->insert([
+    		'name' => str_random(10),
+    		'email' => str_random(10).'@gmail.com',
+    		'password' => bcrypt('secret'),
+    		'remember_token' => str_random(10)
+    		]);    
     }
 }
