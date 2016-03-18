@@ -11,14 +11,6 @@
 |
 */
 
-Route::resource('/articles','ArticleController');
-
-
-Route::get('/articles/{id}', function ($id) {
-	return 'Article Nº'.$id;
-});
-
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -44,7 +36,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/articles', 'PostController');
     Route::get('/articles/destroy/{$id}', 'PostController@destroy');
 
-
 	// Gestion des commentaires
     Route::post('/comments', 'CommentsController@store');
     Route::get('comments/{comment}', 'CommentsController@destroy');
@@ -54,6 +45,9 @@ Route::group(['middleware' => 'web'], function () {
 
     // Gestion de la page Contact
     Route::resource('/contact', 'ContactController');
+
+    // Gestion des projets
+    Route::resource('/projects', 'ProjectController');
 
 	
 });

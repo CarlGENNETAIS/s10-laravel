@@ -49,6 +49,8 @@
                 <ul class="nav navbar-nav">
                     <!-- <li><a href="{{ url('/home') }}">Home</a></li> -->
                     <li><a href="{{ url('/articles') }}">Blog</a></li>
+                    <li><a href="{{ url('/projects') }}">Liste des projets</a></li>
+                    <li><a href="{{ url('/projects/create') }}">Soumettre un projet</a></li>
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
 
