@@ -11,7 +11,6 @@
                         @foreach($posts as $post)
 
                             <a href="articles/{!! $post->id !!}"><h3>{!! $post->title !!}</h3></a>
-                            <p>{!! $post->description !!}</p>
 
                         @endforeach
                     </div>

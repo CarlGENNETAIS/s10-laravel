@@ -31,7 +31,8 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <h2>Commentaires</h2>
-                
+                 @include('comments.index', ['comments' => $post->comments])
+                 @include('comments.form')
             </div>
         </div>
     </div>

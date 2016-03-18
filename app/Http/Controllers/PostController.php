@@ -25,7 +25,7 @@ class PostController extends Controller
     public function index()
     {
         return response()->view('articles.index', array_merge([
-            'posts' =>  Post::all()
+            'posts' =>  Post::orderBy('created_at', 'desc')->paginate(10)
         ]));
     }
 

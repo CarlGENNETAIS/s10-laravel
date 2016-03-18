@@ -42,6 +42,10 @@ Route::group(['middleware' => 'web'], function () {
     // Création et édition des articles
     Route::resource('/articles', 'PostController');
 
+	// Gestion des commentaires
+    Route::post('/comments', 'CommentsController@store');
+    Route::get('comments/{comment}', 'CommentsController@destroy');
+    
 	Route::get('/admin',function() {
 		return 'admin';
 	})->middleware('isadmin');
