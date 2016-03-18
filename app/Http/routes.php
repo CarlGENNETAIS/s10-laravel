@@ -51,5 +51,9 @@ Route::group(['middleware' => 'web'], function () {
 
     // Gestion de l'administration
     Route::resource('/admin', 'AdminController');
+
+    // Gestion de la page Contact
+    Route::resource('/contact', 'ContactController');
+
 	
 });
