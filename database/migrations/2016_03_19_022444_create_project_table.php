@@ -30,7 +30,7 @@ class CreateProjectTable extends Migration
         $table->longText('application_project');
         $table->longText('objective_project');
         $table->longText('constraint')->nullable();
-        $table->integer('validated')->default(0);
+        $table->boolean('validated')->default(0);
         $table->timeStamps();
     });
     }

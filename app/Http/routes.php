@@ -49,5 +49,12 @@ Route::group(['middleware' => 'web'], function () {
     // Gestion des projets
     Route::resource('/projects', 'ProjectController');
 
+    // Gestion des profils
+    Route::get('/profile', array('as'=>'profile','before'=>'auth','uses'=>'ProfileController@getProfile'));
+    Route::get('/editProfile', array('as'=>'editProfile','before'=>'auth','uses'=>'ProfileController@editProfile'));
+    Route::post('/updateProfile', array('as'=>'updateProfile','before'=>'auth','uses'=>'EditProfileController@updatePro'));
+        
+
+
 	
 });

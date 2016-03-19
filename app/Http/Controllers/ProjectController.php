@@ -10,6 +10,13 @@ use App\Http\Requests;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin')->except('create', 'index');
+    }
+
+    // liste des projets validés
     public function index()
     {
         return response()->view('projects.index', array_merge([
@@ -17,18 +24,22 @@ class ProjectController extends Controller
         ]));
     }
 
+    // Création d'un nouveau projet
     public function create()
     {
         return view('projects.create', compact('project'));
     }
 
+    // Sauvegarde du nouveau projet dans la base de donnée
     public function store(ProjectsRequest $request)
     {
         $project = Project::create($request->except('_token'));
-        return redirect(route('projects.index'));
+        return redirect(route('projects.index'))
+            ->with('message', 'Projet envoyé et en attente de validation !');
 
     }
 
+    // Affichage d'un seul projet en détail
     public function show($id)
     {
 
@@ -40,6 +51,7 @@ class ProjectController extends Controller
 
     }
 
+    // Édition de projet
     public function edit($id)
     {
         return response()->view('projects.edit', array_merge([
@@ -48,14 +60,17 @@ class ProjectController extends Controller
         ]));
     }
 
+    // Mise à jour de projet dans la base de donnée après édition
     public function update(ProjectsRequest $request, $id)
     {
         $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $project->update($request->except('_token'));
 
-        return redirect(route('projects.index'));
+        return redirect(route('projects.show', $id))
+            ->with('message', 'Modification enregistrée !');
     }
 
+    // Suppression de projet dans la base de donnéee
     public function destroy($id)
     {
         $project = Project::findOrFail($id);
@@ -63,4 +78,5 @@ class ProjectController extends Controller
 
         return redirect(route('projects.index'));
     }
+
 }

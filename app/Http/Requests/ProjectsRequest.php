@@ -24,17 +24,17 @@ class ProjectsRequest extends Request
     public function rules()
     {
         return[
-            'name_project'          => 'required|min:3',    /*Champs requis & Minimum de trois caractère*/
-            'name_client_command'   => 'required|min:3',    /*Champs requis & Minimum de trois caractère*/
-            'email_command'         => 'required|email',    /*Champs requis & Format mail classique obligatoire*/
-            'phone_command'         => 'required',          /*Champs requis*/
-            'name_client_monitor'   => 'required|min:3',    /*Champs requis & Minimum de trois caractère*/
-            'email_monitor'         => 'required|email',    /*Champs requis & Format mail classique obligatoire*/
-            'phone_monitor'         => 'required',          /*Champs requis*/
-            'identity_fiche'        => 'required',          /*Champs requis*/
-            'project_type'          => 'required',          /*Champs requis*/
-            'objective_project'     => 'required',          /*Champs requis*/
-            'application_project'   => 'required',          /*Champs requis*/
+            'name_project'          => 'required',   
+            'name_client_command'   => 'required',  
+            'email_command'         => 'required', 
+            'phone_command'         => 'required',
+            'name_client_monitor'   => 'required',
+            'email_monitor'         => 'required',
+            'phone_monitor'         => 'required',  
+            'identity_fiche'        => 'required', 
+            'project_type'          => 'required',
+            'objective_project'     => 'required', 
+            'application_project'   => 'required',
 
         ];
     }
@@ -42,32 +42,27 @@ class ProjectsRequest extends Request
     public function messages()
     {
         return [
-            'name.required'                 => 'Nom Obligatoire',
-            'name.min'                      => 'Le nom doit faire au moins 3 caractères',
+            'name.required'                 => 'Veuillez remplir un nom',
 
-            'name_client_command.required'  => 'Nom du client commanditaire obligatoire',
-            'name_client_command.min'       => 'Le nom du client commanditaire doit faire au moins 3 caractères',
+            'name_client_command.required'  => 'Veuillez remplir un nom de client',
 
-            'email_command.required'        => 'Email du client commanditaire obligatoire',
-            'email_command.email'           => 'Merci de respecter le format des Emails [Commanditaire]',
+            'email_command.required'        => 'Veuillez remplir un email client',
 
-            'phone_command.required'        => 'Numéro de téléphone du client commanditaire obligatoire',
+            'phone_command.required'        => 'Veuillez remplir un numéro tel client',
 
-            'name_client_monitor.required'  => 'Nom du client suiveur obligatoire',
-            'name_client_monitor.min'       => 'Le nom du client suiveur doit faire au moins 3 caractères',
+            'name_client_monitor.required'  => 'Veuillez remplir un suiveur',
 
-            'email_monitor.required'        => 'Email du client suiveur obligatoire',
-            'email_monitor.email'           => 'Merci de respecter le format des Emails [Suiveur]',
+            'email_monitor.required'        => 'Veuillez remplir un email suiveur',
 
-            'phone_monitor.required'        => 'Numéro de téléphone du client suiveur obligatoire',
+            'phone_monitor.required'        => 'Veuillez remplir un num tel suiveur',
 
-            'project_type.required'         => 'Merci de cocher au moins un type de projet',
+            'project_type.required'         => 'Veuillez cocher un type de projet',
 
-            'identity_fiche.required'       => 'Fiche d\'identité à remplir obligatoirement',
+            'identity_fiche.required'       => 'Veuillez remplir la fiche d\'identite',
 
-            'application_project.required'  => 'Merci de renseigner votre demande',
+            'application_project.required'  => 'Veuillez remplir une demande',
 
-            'objective_project.required'    => 'Merci de renseigner vos objectifs'
+            'objective_project.required'    => 'Veuillez remplir des objectifs'
         ];
     }
 }

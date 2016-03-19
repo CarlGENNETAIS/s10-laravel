@@ -1,25 +1,33 @@
 
 {!! Form::open(['url' => action('CommentsController@store')]) !!}
 {!! Form::token() !!}
+@if($errors)
+<br />
+<ul style="list-style: none;">
+    @foreach($errors->all() as $error)
+    <li style="color:red;">/!\ {{$error}}</li>
+    @endforeach
+</ul>
+@endif
 
 <div class="row">
     {{--Formulaire pour les utilisateurs invités--}}
     @if(Auth::guest())
-        <div class="col-md-6">
-            <div class="form-group">
-                {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Pseudo']) !!}
-            </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Pseudo']) !!}
         </div>
+    </div>
 
-        <div class="col-md-6">
-            <div class="form-group">
-                {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'E-Mail']) !!}
-            </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'E-Mail']) !!}
         </div>
+    </div>
 
     {{--Formulaire pour les utilisateurs connectés--}}
     @else
-        {!! Form::hidden('user_id', $post->id) !!}
+    {!! Form::hidden('user_id', $post->id) !!}
     @endif
 
     {{--Message disponible pour tous les utilisateurs--}}

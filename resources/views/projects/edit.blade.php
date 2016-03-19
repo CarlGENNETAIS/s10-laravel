@@ -7,8 +7,25 @@
                 {{--Retour arrière--}}
                 <a href="{{ URL::previous() }}"><button class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> Retour</button></a><br /><br />
 
+                <!-- Affichage des erreurs de validation -->
+                @if($errors)
+                    <br />
+                    <ul style="list-style: none;">
+                        @foreach($errors->all() as $error)
+                            <li style="color:red;">--> {{$error}}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                <!-- Affichage du message de succès -->
+                @if(Session::has('message'))
+                    <div class="alert alert-info">
+                        {{Session::get('message')}}
+                    </div>
+                @endif
+
+                <!-- Formulaire d'édition de projet -->
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h2>Éditer le projet n°{!! $id !!}</h2></div>
+                    <div class="panel-heading"><h3>Éditer le projet n°{!! $id !!}</h3></div>
 
                     <div class="panel-body">
                         {!! Form::open(array('url'  =>  route('projects.update', $id), 'method'  =>  'put')) !!}
@@ -40,18 +57,18 @@
                             {!! Form::label('Fiche Identité') !!}
                             {!! Form::textarea('identity_fiche', $project->identity_fiche, ['class'   =>  'form-control', 'placeholder' => $project->identity_fiche]) !!}<br /><br />
 
-                            {{--CheckBox Part--}}
+                            {{--Radio Part--}}
                             {!! Form::label('Type du projet') !!}<br/>
-                            {!! Form::checkbox('project_type', 1, null, ['class'   =>  'yield']) !!} Site Internet<br/>
-                            {!! Form::checkbox('project_type', 2, null, ['class'   =>  'yield']) !!} 3D<br/>
-                            {!! Form::checkbox('project_type', 3, null, ['class'   =>  'yield']) !!} Animation 2D<br/>
-                            {!! Form::checkbox('project_type', 4, null, ['class'   =>  'yield']) !!} Installation multimédia<br/>
-                            {!! Form::checkbox('project_type', 5, null, ['class'   =>  'yield']) !!} Jeu vidéo<br/>
-                            {!! Form::checkbox('project_type', 6, null, ['class'   =>  'yield']) !!} DVD<br/>
-                            {!! Form::checkbox('project_type', 7, null, ['class'   =>  'yield']) !!} Print<br/>
-                            {!! Form::checkbox('project_type', 8, null, ['class'   =>  'yield']) !!} CD-Rom<br/>
-                            {!! Form::checkbox('project_type', 9, null, ['class'   =>  'yield']) !!} Evènement<br/>
-                            {!! Form::checkbox('project_type', 10, null, ['class'   =>  'yield']) !!}Autre<br/><br/>
+                            {!! Form::radio('project_type', 1, ($project->project_type == 1) ? true : null) !!} Site Internet<br/>
+                            {!! Form::radio('project_type', 2, ($project->project_type == 2) ? true : null) !!} 3D<br/>
+                            {!! Form::radio('project_type', 3, ($project->project_type == 3) ? true : null) !!} Animation 2D<br/>
+                            {!! Form::radio('project_type', 4, ($project->project_type == 4) ? true : null) !!} Installation multimédia<br/>
+                            {!! Form::radio('project_type', 5, ($project->project_type == 5) ? true : null) !!} Jeu vidéo<br/>
+                            {!! Form::radio('project_type', 6, ($project->project_type == 6) ? true : null) !!} DVD<br/>
+                            {!! Form::radio('project_type', 7, ($project->project_type == 7) ? true : null) !!} Print<br/>
+                            {!! Form::radio('project_type', 8, ($project->project_type == 8) ? true : null) !!} CD-Rom<br/>
+                            {!! Form::radio('project_type', 9, ($project->project_type == 9) ? true : null) !!} Evènement<br/>
+                            {!! Form::radio('project_type', 10, ($project->project_type == 10) ? true : null) !!}Autre<br/><br/>
 
                             {{--Retour description du projet--}}
                             {!! Form::label('Contexte de la demande') !!}

@@ -25,8 +25,8 @@ class CommentsRequest extends Request
     public function rules(Guard $auth)
     {
         $rules = [
-            'post_id'   => 'required|exists:posts,id',
-            'content'   => 'required|min:3'
+        'post_id'   => 'required|exists:posts,id',
+        'content'   => 'required|min:3'
         ];
         if($auth->guest()){
             $rules['email'] = 'required|email';
@@ -34,4 +34,13 @@ class CommentsRequest extends Request
         }
         return $rules;
     }
+
+    public function messages()
+    {
+        return [
+        'email.email'           => 'Veuillez entrer un email valide',
+        'username.min'           => 'Veuillez entrer un pseudo de plus de 3 caracteres.'
+        ];
+    }
+
 }
